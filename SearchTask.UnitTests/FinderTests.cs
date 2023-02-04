@@ -1,12 +1,4 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SearchTask.UnitTests
+﻿namespace SearchTask.UnitTests
 {
     [TestFixture]
     internal class FinderTests
@@ -50,7 +42,7 @@ namespace SearchTask.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.That(actualStartIndex, Is.EqualTo(5));
-                Assert.That(actualEndIndex, Is.EqualTo(5));
+                Assert.That(actualEndIndex, Is.EqualTo(6));
             });
         }
         [Test]
@@ -62,7 +54,7 @@ namespace SearchTask.UnitTests
             Assert.Multiple(() =>
             {
                 Assert.That(actualStartIndex, Is.EqualTo(1));
-                Assert.That(actualEndIndex, Is.EqualTo(1));
+                Assert.That(actualEndIndex, Is.EqualTo(2));
             });
         }
         #endregion
@@ -116,6 +108,18 @@ namespace SearchTask.UnitTests
                 Assert.That(actualEndIndex, Is.EqualTo(6));
             });
         }
+        [Test]
+        public void FindElementsForSum_SumIsResultOffAddingAllElements_AssignIndexes()
+        {
+            finder.FindElementsForSum(
+                new List<uint> { 33, 64, 99, 89, 22, 58, 39, 70, 63, 11, 75, 45, 51, 89, 49, 26, 15, 80, 69, 66 },
+                1113, out actualStartIndex, out actualEndIndex);
+            Assert.Multiple(() =>
+            {
+                Assert.That(actualStartIndex, Is.EqualTo(0));
+                Assert.That(actualEndIndex, Is.EqualTo(20));
+            });
+        }
         #endregion
 
         #region None of the sequences is equal to the sum
@@ -144,14 +148,5 @@ namespace SearchTask.UnitTests
             });
         }
         #endregion
-
-        /*
-* FindElementsForSumTest(new List<uint> { 0, 1, 2, 3, 4, 5, 6, 7 }, 11, out start, out end); 
-* //start будет равен 5 и end 7;
-* FindElementsForSumTest(new List<uint> { 4, 5, 6, 7 }, 18, out start, out end); 
-* //start будет равен 1 и end 4;
-* FindElementsForSumTest(new List<uint> { 0, 1, 2, 3, 4, 5, 6, 7 }, 88, out start, out end); 
-* //start будет равен 0 и end 0;
-*/
     }
 }
